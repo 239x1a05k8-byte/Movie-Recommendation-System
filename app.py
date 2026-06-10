@@ -1,7 +1,5 @@
 import streamlit as st
-import pickle
-
-from src.model import recommend
+from src.model import recommend, movies
 
 # Page Configuration
 st.set_page_config(
@@ -64,30 +62,22 @@ st.markdown("""
 
 # Sidebar
 st.sidebar.title("👩‍💻 Developer")
-
 st.sidebar.success("Sakkari Jhansi Rani")
 
 st.sidebar.markdown("---")
 
 st.sidebar.header("📌 Project Info")
-
 st.sidebar.write("""
 This project recommends movies using:
 
-✅ Content-Based Filtering
-
-✅ Count Vectorization
-
-✅ Cosine Similarity
-
-✅ Streamlit
+✅ Content-Based Filtering  
+✅ Count Vectorization  
+✅ Cosine Similarity  
+✅ Streamlit  
 
 Dataset Used:
 TMDB 5000 Movies Dataset
 """)
-
-# Load Model
-movies = pickle.load(open('model/movies.pkl', 'rb'))
 
 # Header
 st.markdown(
@@ -116,29 +106,22 @@ if st.button("🚀 Get Recommendations"):
     st.markdown("## ✨ Recommended Movies")
 
     col1, col2, col3, col4, col5 = st.columns(5)
-
-    cards = [col1, col2, col3, col4, col5]
+    cols = [col1, col2, col3, col4, col5]
 
     for i in range(len(recommendations)):
-        with cards[i]:
-            st.markdown(
-                f"""
-                <div class="card">
-                🎬<br><br>
-                {recommendations[i]}
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        with cols[i]:
+            st.markdown(f"""
+            <div class="card">
+            🎬<br><br>
+            {recommendations[i]}
+            </div>
+            """, unsafe_allow_html=True)
 
 st.markdown("---")
 
-st.markdown(
-    """
-    <div class="footer">
-    Developed with by <b>Sakkari Jhansi Rani</b><br>
-    AI Intern | Web Developer | CSE Student
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div class="footer">
+Developed by <b>Sakkari Jhansi Rani</b><br>
+AI Intern | Web Developer | CSE Student
+</div>
+""", unsafe_allow_html=True)
